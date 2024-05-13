@@ -509,17 +509,17 @@ print(f"Percentage : {percentage}% .")
 
 ## custom image
 
-# img_path = "/content/WhatsApp Image 2024-05-06 at 18.56.30.jpeg"
-# image2 = preprocess_image(img_path)
+img_path = "E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage1.jpeg"
+image2 = preprocess_image(img_path)
 # # label = vectorize_label(label)
-# img2 = tf.image.flip_left_right(image2)
-# img2 = tf.transpose(img2, perm=[1, 0, 2])
-# img2 = (img2 * 255.0).numpy().clip(0, 255).astype(np.uint8)
-# img2 = img2[:, :, 0]
-# plt.imshow(img2,cmap="gray")
-# plt.show()
-# img_list = [img2]
-# print(img2.shape)
+img2 = tf.image.flip_left_right(image2)
+img2 = tf.transpose(img2, perm=[1, 0, 2])
+img2 = (img2 * 255.0).numpy().clip(0, 255).astype(np.uint8)
+img2 = img2[:, :, 0]
+plt.imshow(img2,cmap="gray")
+plt.show()
+img_list = [img2]
+print(img2.shape)
 # gathering text
 # preds2 = prediction_model.predict(img_list)
 # pred_texts2 = decode_batch_predictions(preds2)
@@ -531,37 +531,36 @@ def prepare_dataset_custom(img_paths_3):
     )
     return dataset.batch(batch_size).cache().prefetch(AUTOTUNE)
 
-# img_paths_3 = ["/content/WhatsApp Image 2024-05-06 at 18.56.30.jpeg","/content/WhatsApp Image 2024-05-06 at 18.56.30.jpeg","/content/WhatsApp Image 2024-05-06 at 18.56.30.jpeg","/content/WhatsApp Image 2024-05-06 at 18.56.30.jpeg"]
-# custom_ds = prepare_dataset_custom(img_paths_3)
-# custom_ds
+img_paths_3 = ["E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage2.jpeg","E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage3.jpeg","E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage4.jpeg","E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage5.jpeg","E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage6.jpeg","E:\Academics\TY-AIDS-2023\Sem 6 PBL\DP\HandRX\testimage7.jpeg"]
+custom_ds = prepare_dataset_custom(img_paths_3)
+custom_ds
 
-# for batch in custom_ds.take(1):
+for batch in custom_ds.take(1):
 #     # print(batch["label"])
 #     # print(batch)
 #     # batch_images = batch["image"]
-#     print("len is : ",len(batch))
-#     print("batch img shape: ",batch[0].shape)
-#     print("batch img shape: ",batch[1].shape)
+    print("len is : ",len(batch))
+    print("batch img shape: ",batch[0].shape)
+    print("batch img shape: ",batch[1].shape)
 
-#     _, ax = plt.subplots(1, 4, figsize=(15, 8))
+    _, ax = plt.subplots(1, 4, figsize=(15, 8))
 
-#     preds = prediction_model.predict(batch)
-#     pred_texts = decode_batch_predictions(preds)
-#     print(pred_texts)
+    preds = prediction_model.predict(batch)
+    pred_texts = decode_batch_predictions(preds)
+    print(pred_texts)
 
-#     for i in range(4):
-#         img = batch[i]
-#         img = tf.image.flip_left_right(img)
-#         img = tf.transpose(img, perm=[1, 0, 2])
-#         img = (img * 255.0).numpy().clip(0, 255).astype(np.uint8)
-#         img = img[:, :, 0]
+    for i in range(4):
+        img = batch[i]
+        img = tf.image.flip_left_right(img)
+        img = tf.transpose(img, perm=[1, 0, 2])
+        img = (img * 255.0).numpy().clip(0, 255).astype(np.uint8)
+        img = img[:, :, 0]
 
-#         title = f"Prediction: {pred_texts[i]}"
-#         ax[i].imshow(img, cmap="gray")
-#         ax[i].set_title(title)
-#         ax[i].axis("off")
-
-# plt.show()
+        title = f"Prediction: {pred_texts[i]}"
+        ax[i].imshow(img, cmap="gray")
+        ax[i].set_title(title)
+        ax[i].axis("off")
+plt.show()
 
 # val_loss_list = history.history["val_loss"]
 # print(val_loss_list)
